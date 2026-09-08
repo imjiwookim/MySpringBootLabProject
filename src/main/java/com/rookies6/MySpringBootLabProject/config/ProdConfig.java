@@ -1,5 +1,6 @@
-package com.rookies6.MySpringBootLabProject;
+package com.rookies6.MySpringBootLabProject.config;
 
+import com.rookies6.MySpringBootLabProject.dto.MyEnvironment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

@@ -1,5 +1,7 @@
-package com.rookies6.MySpringBootLabProject;
+package com.rookies6.MySpringBootLabProject.runner;
 
+import com.rookies6.MySpringBootLabProject.MyPropProperties;
+import com.rookies6.MySpringBootLabProject.dto.MyEnvironment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
