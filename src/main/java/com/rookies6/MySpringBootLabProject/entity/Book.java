@@ -27,7 +27,18 @@ public class Book {
     @Column(nullable = false, unique = true)
     private String isbn;
 
+    private Integer price;
+
     private LocalDate publishDate;
 
-    private Integer price;
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private BookDetail bookDetail;
+
+    // 양방향 연관관계 편의 메서드
+    public void setBookDetail(BookDetail bookDetail) {
+        this.bookDetail = bookDetail;
+        if (bookDetail != null) {
+            bookDetail.setBook(this);
+        }
+    }
 }

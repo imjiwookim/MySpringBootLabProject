@@ -1,5 +1,6 @@
 package com.rookies6.MySpringBootLabProject.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ public class BookDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class BookCreateRequest {
+    public static class Request {
 
         @NotBlank(message = "제목은 필수입니다.")
         private String title;
@@ -25,12 +26,15 @@ public class BookDTO {
         private String isbn;
 
         @NotNull(message = "가격은 필수입니다.")
-        @Positive(message = "가격은 0보다 커야 합니다.")
+        @PositiveOrZero(message = "가격은 0 이상이어야 합니다.")
         private Integer price;
 
         @NotNull(message = "출판일은 필수입니다.")
         @PastOrPresent(message = "출판일은 오늘 이전이어야 합니다.")
         private LocalDate publishDate;
+
+        @Valid
+        private BookDetailDTO detailRequest;
     }
 
     @Getter
@@ -38,16 +42,17 @@ public class BookDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class BookUpdateRequest {
+    public static class BookDetailDTO {
 
-        private String title;
-        private String author;
+        private String description;
+        private String language;
 
-        @Positive(message = "가격은 0보다 커야 합니다.")
-        private Integer price;
+        @PositiveOrZero(message = "페이지 수는 0 이상이어야 합니다.")
+        private Integer pageCount;
 
-        @PastOrPresent(message = "출판일은 오늘 이전이어야 합니다.")
-        private LocalDate publishDate;
+        private String publisher;
+        private String coverImageUrl;
+        private String edition;
     }
 
     @Getter
@@ -55,7 +60,7 @@ public class BookDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class BookResponse {
+    public static class Response {
 
         private Long id;
         private String title;
@@ -63,5 +68,22 @@ public class BookDTO {
         private String isbn;
         private Integer price;
         private LocalDate publishDate;
+        private BookDetailResponse detail;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class BookDetailResponse {
+
+        private Long id;
+        private String description;
+        private String language;
+        private Integer pageCount;
+        private String publisher;
+        private String coverImageUrl;
+        private String edition;
     }
 }
